@@ -1,0 +1,29 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches: [ main ]  # Se activa al subir cambios a la rama main
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x' # Ajustado a la versión que usas
+
+    - name: Restaurar dependencias
+      run: dotnet restore
+
+    - name: Compilar (Build)
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Ejecutar Pruebas (Tests)
+      run: dotnet test --no-restore --verbosity normal

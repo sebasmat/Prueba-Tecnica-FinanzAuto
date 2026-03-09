@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:15
+    container_name: asisya_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Prueba123
+      POSTGRES_DB: asisya_db
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ./Back
+      dockerfile: Dockerfile
+    container_name: back_api
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=asisya_db;Username=postgres;Password=Prueba123
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "8080:80"

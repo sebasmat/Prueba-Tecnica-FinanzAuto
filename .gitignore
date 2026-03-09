@@ -1,0 +1,11 @@
+# Carpetas de salida de compilación
+[Bb]in/
+[Oo]bj/
+
+# Configuración de IDEs (VS Code, Visual Studio)
+.vs/
+.vscode/
+
+# Archivos de usuario y secretos locales
+*.user
+appsettings.Development.json
